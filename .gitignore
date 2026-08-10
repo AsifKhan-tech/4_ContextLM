@@ -143,3 +143,9 @@ vite.config.ts.timestamp-*
 .vite/
 
 notes.md
+
+.claude/
+.agents/
+.windsurf/
+
+skills-lock.json
