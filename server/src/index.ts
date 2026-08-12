@@ -1,12 +1,21 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth.js";
+import { registerRoutes } from "./routes/index.js";
+import { errorHandler } from "./middleware/error-handler-middleware.js";
 
 dotenv.config();
 const app = express();
 const PORT = Number(process.env.PORT) || 8000;
 
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL ?? "http://localhost:3000",
+    credentials: true,
+  }),
+);
 /*
  * Better Auth handler
  */
@@ -26,6 +35,9 @@ app.get("/health", (req, res) => {
     message: "Server is healthy",
   });
 });
+
+registerRoutes(app);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`server is listening on http://localhost:${PORT}`);
