@@ -147,7 +147,6 @@ notes.md
 .claude/
 .agents/
 .windsurf/
-.vscode/
 
 skills-lock.json
 /src/generated/prisma
